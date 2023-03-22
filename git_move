@@ -7,13 +7,13 @@ target_name="target_repo"
 if [[ -n "$source" ]] && [[ -n "$target" ]]; then
 	git clone $target $target_name
 	cd $target_name
+    find . -mindepth 1 -maxdepth 1 -path ./.git -prune -o -exec rm -rf {} +
     git clone $source $source_name
 	cd $source_name
 	rm -rf .git
 	mv * ../
 	cd ..
 	rm -rf $source_name
-	git add .
 else
     echo "usage: move_repo.sh <source> <target>"
 fi
